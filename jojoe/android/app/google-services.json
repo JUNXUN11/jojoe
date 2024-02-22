@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "636615947884",
+    "project_id": "jojoe-65e9b",
+    "storage_bucket": "jojoe-65e9b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636615947884:android:62ee0ab714d933fdec4a49",
+        "android_client_info": {
+          "package_name": "com.example.jojoe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5aLaWxLqRLoEkO4wS6WvKLBpEW7I5AYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
