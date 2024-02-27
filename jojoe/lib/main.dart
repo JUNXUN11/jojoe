@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:jojoe/auth/main_page.dart';
 import 'package:jojoe/firebase_options.dart';
 import 'package:jojoe/model/menu_model.dart';
+import 'package:jojoe/pages/cart_page.dart';
 import 'package:jojoe/pages/home_page.dart';
 import 'package:jojoe/pages/login_page.dart';
 import 'package:jojoe/profile/profile_page.dart';

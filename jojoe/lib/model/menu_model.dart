@@ -1,15 +1,53 @@
 import 'package:flutter/material.dart';
 
+/*class Menu{
+  final String name ;
+  final String cname;
+  final String url;
+
+  Menu({required this.name, required this.cname, required this.url });
+}*/
+
+
 class MenuModel extends ChangeNotifier{
 
+  //menu list
   final List _menuItems = [
-    ["咕嚕肉","4.00","lib/images/gulurou.png"],
-    ["煎蛋","4.00","lib/images/egg.png"],
-    ["大白菜","4.00","lib/images/vege.png"],
-    ["飯","4.00","lib/images/rice.png"],
-   
+    ["咕嚕肉","Sweet and Sour Pork","lib/images/gulurou.png",],
+    ["煎蛋","Fried Egg","lib/images/egg.png"],
+    ["大白菜","Vegetables","lib/images/vege.png"],
+    ["飯","Rice","lib/images/rice.png"],
+
+    /*[Menu(name: "咕嚕肉", cname: "Sweet and Sour Pork", url: "lib/images/gulurou.png")],
+    [Menu(name: "煎蛋", cname: "Fried Egg", url: "lib/images/egg.png")]
+   */
+
   ];
 
+  //cart list
+  List _cartItems = [];
+
   get menuItems => _menuItems;
+  get cartItems => _cartItems;
   
+  //add
+  void addItemToCart(int index){    
+    _cartItems.add(_menuItems[index]);
+    notifyListeners();  
+  }
+  
+  //remove
+   void removeItemFromCart(int index){
+    _cartItems.remove(_menuItems[index]);
+    notifyListeners();   
+  }
+
+  //calculate
+  String calculatePrice(){
+    double totalPrice = 0 ;
+    for(int i = 0 ; i < _cartItems.length ; i++){
+      totalPrice += 1 ;
+    }
+    return totalPrice.toStringAsFixed(2);
+  }
 }

@@ -122,8 +122,13 @@ class _ProfilePageState extends State<ProfilePage> {
             
           );
         }
-        else return
-        Text('oh no');
+        else if(snapshot.hasError){
+          return Center(
+            child: Text('Error${snapshot.error}'));
+        }
+
+        return const Center(child: CircularProgressIndicator());
+        
       },
       )
     );

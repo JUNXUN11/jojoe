@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jojoe/pages/history_page.dart';
+import 'package:jojoe/pages/notification.dart';
 import 'package:jojoe/pages/home_page.dart';
 import 'package:jojoe/pages/order_page.dart';
 import 'package:jojoe/profile/profile_page.dart';
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _pages = [
      HomePage(),
      OrderPage(),
-     HistoryPage(),
+     NotificationPage(),
      ProfilePage()
   ];
 
@@ -57,8 +57,8 @@ class _HomeState extends State<Home> {
             label: 'Order',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history_toggle_off),
-            label: 'History',
+            icon: Icon(Icons.circle_notifications_rounded),
+            label: 'Notification',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

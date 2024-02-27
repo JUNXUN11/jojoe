@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jojoe/components/menu_item_tile.dart';
 import 'package:jojoe/model/menu_model.dart';
+import 'package:jojoe/pages/cart_page.dart';
 import 'package:jojoe/pages/order_page.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     floatingActionButton: FloatingActionButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(
         builder: (context){
-          return OrderPage();
+          return CartPage();
         },      
       )),
     backgroundColor: Colors.black,
@@ -60,30 +61,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [          
-              Divider(),
-              const Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Center(
-                  child: Text(
-                    'Available menu',               
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              SizedBox(height: 5),
-              Center(
-                child: Text(
-                  'select',               
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 13,
-                    decoration: TextDecoration.underline),
-                ),
-              ),
-              SizedBox(height: 20,),
-                  
+              Divider(),             
+              SizedBox(height: 5),                                          
               Center(
                 child: Text(
                   'Today Main Dish',
@@ -107,8 +86,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     itemBuilder: (context,index){
                       return MenuItemTile(
-                        itemName: value.menuItems[index][0],              
-                        itemPrice: value.menuItems[index][1],
+                        itemCName: value.menuItems[index][0],              
+                        itemName: value.menuItems[index][1],
                         imagePath: value.menuItems[index][2],                   
                         );}              
                       );
@@ -140,8 +119,8 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(12),                
                     itemBuilder: (context,index){
                       return MenuItemTile(
-                        itemName: value.menuItems[index][0],              
-                        itemPrice: value.menuItems[index][1],
+                        itemCName: value.menuItems[index][0],              
+                        itemName: value.menuItems[index][1],
                         imagePath: value.menuItems[index][2],                   
                         );}              
                       );
