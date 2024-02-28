@@ -70,15 +70,14 @@ class _CartPageState extends State<CartPage> {
                     padding: EdgeInsets.all(12),         
                     itemBuilder: (context,index){
                       return OrderItemTile(
-                        itemCName: value.menuItems[index][0],              
-                        itemName: value.menuItems[index][1],
-                        imagePath: value.menuItems[index][2],
-                        onPressed: () {
+                        itemCName: value.menuItems[index].name,              
+                        itemName: value.menuItems[index].cname,
+                        imagePath: value.menuItems[index].url,
+                        onPressed: () {                        
                           Provider.of<MenuModel>(context, listen: false)
-                          .addItemToCart(index);  
-                          
+                          .addItemToCart(index);                            
                         },
-                                                                   
+                                                         
                         );             
                         }              
                       );
@@ -89,7 +88,7 @@ class _CartPageState extends State<CartPage> {
 
                 SizedBox(height: 30,),
                 
-               /* Column(
+               Column(
                   children: [
                     Text(
                       'Side Dish',
@@ -111,20 +110,21 @@ class _CartPageState extends State<CartPage> {
                     padding: EdgeInsets.all(12),         
                     itemBuilder: (context,index){
                       return OrderItemTile(
-                        itemCName: value.menuItems[index][0],              
-                        itemName: value.menuItems[index][1],
-                        imagePath: value.menuItems[index][2], 
-                        onPressed: () {                             
+                        itemCName: value.menuItems[index].cname,             
+                        itemName: value.menuItems[index].name,
+                        imagePath: value.menuItems[index].url,
+                        onPressed: () {   
+                                      
                         Provider.of<MenuModel>(context, listen: false)
                         .addItemToCart(index);                                                                    
                         },                                                        
-                                                    
+                                           
                         );}              
                       );
                     },
                   ),           
                         ),
-                ),*/
+                ),
 
                  SizedBox(height: 30,),
 

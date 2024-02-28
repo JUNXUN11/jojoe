@@ -21,7 +21,7 @@ class OrderPage extends StatelessWidget {
                   itemBuilder: (context,index){
                     return ListTile(
                       title: Text(
-                        value.cartItems[index][0],
+                        value.cartItems[index].name,
                         style: TextStyle(
                           color: Colors.black,
                         ),

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jojoe/components/menu_item_tile.dart';
 import 'package:jojoe/model/menu_model.dart';
 import 'package:jojoe/pages/cart_page.dart';
+//import 'package:jojoe/pages/cart_page.dart';
 import 'package:jojoe/pages/order_page.dart';
 import 'package:provider/provider.dart';
 
@@ -86,10 +87,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     itemBuilder: (context,index){
                       return MenuItemTile(
-                        itemCName: value.menuItems[index][0],              
-                        itemName: value.menuItems[index][1],
-                        imagePath: value.menuItems[index][2],                   
-                        );}              
+                            itemName: value.menuItems[index].name, 
+                            itemCName: value.menuItems[index].cname,
+                            imagePath: value.menuItems[index].url,        
+                        );
+                      }              
                       );
                     },
                   ),           
@@ -119,9 +121,9 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(12),                
                     itemBuilder: (context,index){
                       return MenuItemTile(
-                        itemCName: value.menuItems[index][0],              
-                        itemName: value.menuItems[index][1],
-                        imagePath: value.menuItems[index][2],                   
+                        itemCName: value.menuItems[index].name,              
+                        itemName: value.menuItems[index].cname,
+                        imagePath: value.menuItems[index].url,                   
                         );}              
                       );
                     },
