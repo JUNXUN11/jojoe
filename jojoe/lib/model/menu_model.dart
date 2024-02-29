@@ -8,22 +8,18 @@ class MenuModel extends ChangeNotifier{
 
   //menu list
   final List <Menu> _menuItems = [
-    /*["咕嚕肉","Sweet and Sour Pork","lib/images/gulurou.png",],
-    ["煎蛋","Fried Egg","lib/images/egg.png"],
-    ["大白菜","Vegetables","lib/images/vege.png"],
-    ["飯","Rice","lib/images/rice.png"],*/
-   
-    Menu(name: "咕嚕肉", cname: "Sweet and Sour Pork", url: "lib/images/gulurou.png",selected: false),
-    Menu(name: "煎蛋", cname: "Fried Egg", url: "lib/images/egg.png",selected: false),
-    Menu(name: "大白菜", cname: "Vegetables", url: "lib/images/vege.png",selected: false),
-    Menu(name: "飯", cname: "Rice", url: "lib/images/rice.png",selected: false)
-
-   
-
+    
+    Menu(cname: "燒鷄飯", name: "chicken rice", url: "lib/images/shaojifan.png",price: 7,selected: false),
+    Menu(cname: "白雞飯", name: "Hainan chicken rice", url: "lib/images/baijifan.png",price: 7,selected: false),
+    Menu(cname: "叉燒飯", name: "Barbecue pork rice", url: "lib/images/chashaofan.png",price: 8,selected: false),
+    Menu(cname: "燒肉飯", name: "Roast pork rice", url: "lib/images/shaoroufan.png",price: 8,selected: false),
+    Menu(name: "三拼飯", cname: "Threesome rice", url: "lib/images/sanping.png",price: 10,selected: false),
+    Menu(name: "炒飯", cname: "fried rice", url: "lib/images/chaofan.png",price: 7,selected: false),
+    Menu(name: "滷肉飯", cname: "Braised pork rice", url: "lib/images/luroufan.png",price: 9,selected: false),
   ];
 
   //cart list
-  List _cartItems = [];
+  final List <Menu> _cartItems = [];
 
   get menuItems => _menuItems;
   get cartItems => _cartItems;
@@ -44,7 +40,7 @@ class MenuModel extends ChangeNotifier{
   String calculatePrice(){
     double totalPrice = 0 ;
     for(int i = 0 ; i < _cartItems.length ; i++){
-      totalPrice += 1 ;
+      totalPrice += _cartItems[i].price;
     }
     return totalPrice.toStringAsFixed(2);
   }

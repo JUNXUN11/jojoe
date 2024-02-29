@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jojoe/components/button.dart';
 import 'package:jojoe/components/menu_item_tile.dart';
 import 'package:jojoe/model/menu_model.dart';
 import 'package:jojoe/pages/cart_page.dart';
+import 'package:jojoe/pages/menu_page.dart';
 //import 'package:jojoe/pages/cart_page.dart';
 import 'package:jojoe/pages/order_page.dart';
+import 'package:jojoe/theme/color.dart';
 import 'package:provider/provider.dart';
 
 
@@ -23,18 +26,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
        appBar: AppBar(
         title: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left:30),
-            child: Text(
-              'Jojoe Mixed Rice',
-              style: GoogleFonts.oswald(
-                fontWeight: FontWeight.bold
-              ),
+          child: Text(
+            'Jojoe Chicken Rice',
+            style: GoogleFonts.oswald(
+              fontWeight: FontWeight.bold
             ),
           )             
         ),
-        actions: [   
-          GestureDetector(
+        leading: GestureDetector(
             onTap: (){
               FirebaseAuth.instance.signOut();
             },
@@ -43,6 +42,18 @@ class _HomePageState extends State<HomePage> {
             child: Icon(Icons.logout),
           ),
         ),
+        actions: [   
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            color: Colors.black, 
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+               builder: (context){
+               return CartPage();
+              },      
+            ));
+            }
+          )
       ],    
     ),
     
@@ -50,93 +61,77 @@ class _HomePageState extends State<HomePage> {
     floatingActionButton: FloatingActionButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(
         builder: (context){
-          return CartPage();
+          return MenuPage();
         },      
       )),
-    backgroundColor: Colors.black,
-    child: Icon(Icons.food_bank,color: Colors.white,)
+      backgroundColor: Colors.black,
+      child: Icon(Icons.food_bank,color: Colors.white,)
     ),
       
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [          
-              Divider(),             
-              SizedBox(height: 5),                                          
-              Center(
-                child: Text(
-                  'Today Main Dish',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),      
-              //menu 
-              SizedBox(
-                height: 400,
-                child: Expanded(
-                  child: Consumer<MenuModel>(
-                    builder: (context, value, child) {
-                      return GridView.builder(
-                        itemCount: value.menuItems.length,
-                    padding: EdgeInsets.all(12),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    itemBuilder: (context,index){
-                      return MenuItemTile(
-                            itemName: value.menuItems[index].name, 
-                            itemCName: value.menuItems[index].cname,
-                            imagePath: value.menuItems[index].url,        
-                        );
-                      }              
-                      );
-                    },
-                  ),           
-                ),
-              ),
-            SizedBox(height: 25,),
+      body: Column(       
+        children: [
+          const SizedBox(height: 20,),
+          Wallet(),
+        ],
+      ),
+    );
+  }
+}
 
-           Center(
-                child: Text(
-                  'Today Side Dish',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),      
-        
+class Wallet extends StatelessWidget {
+  const Wallet({
+    super.key,
+  });
 
-            SizedBox(
-                height: 200,
-                child: Expanded(
-                  child: Consumer<MenuModel>(
-                    builder: (context, value, child) {
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: value.menuItems.length,
-                    padding: EdgeInsets.all(12),                
-                    itemBuilder: (context,index){
-                      return MenuItemTile(
-                        itemCName: value.menuItems[index].name,              
-                        itemName: value.menuItems[index].cname,
-                        imagePath: value.menuItems[index].url,                   
-                        );}              
-                      );
-                    },
-                  ),           
-                ),
-              ),
-           
-            
-          
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20), 
+        boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.4),
+          blurRadius: 20,
+          spreadRadius: 0.00,
+        )
+        ]
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.all(25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              Text(
+               'Your Wallet Balance',
+               style: GoogleFonts.aBeeZee(
+                 fontSize:15,
+                 fontWeight: FontWeight.bold
+               ),              
+            ),
+            const SizedBox(height: 20,),
+              Text(
+               'RM 0 ',
+               style: GoogleFonts.aBeeZee(
+                 fontSize:35,
+                 fontWeight: FontWeight.bold
+               ),              
+            ),
             ],
           ),
-        ),
-      )
+          const SizedBox(height: 20,),
+                              
+          GestureDetector(
+           child: MyButton(
+             text: 'Reload',
+           ),
+           onTap: () {            
+           },
+      ),
+        ],
+      ),
     );
   }
 }
