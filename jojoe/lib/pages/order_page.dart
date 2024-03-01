@@ -11,29 +11,6 @@ class OrderPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Order'),
       ),
-      body: Consumer<MenuModel>(
-        builder: (context, value, child) {
-          return Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: value.cartItems.length,
-                  itemBuilder: (context,index){
-                    return ListTile(
-                      title: Text(
-                        value.cartItems[index].name,
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    );
-                  }
-                )
-              )
-            ],
-          );
-        },
-      )
     );
   }
 }

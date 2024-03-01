@@ -6,8 +6,6 @@ import 'package:jojoe/components/menu_item_tile.dart';
 import 'package:jojoe/model/menu_model.dart';
 import 'package:jojoe/pages/cart_page.dart';
 import 'package:jojoe/pages/menu_page.dart';
-//import 'package:jojoe/pages/cart_page.dart';
-import 'package:jojoe/pages/order_page.dart';
 import 'package:jojoe/theme/color.dart';
 import 'package:provider/provider.dart';
 

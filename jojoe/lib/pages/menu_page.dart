@@ -52,9 +52,11 @@ class _MenuPageState extends State<MenuPage> {
                       imagePath: value.menuItems[index].url,
                       price : value.menuItems[index].price, 
                       onPressed: (){ 
+                        final menumodel = context.read<MenuModel>();
+                        final choosemenu = menumodel.menuItems;
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) =>
-                          FoodDetails(menu: value.menuItems[index]),
+                          FoodDetails(menu: choosemenu[index]),
                           )
                         );
           

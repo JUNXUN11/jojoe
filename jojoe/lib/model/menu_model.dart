@@ -25,14 +25,16 @@ class MenuModel extends ChangeNotifier{
   get cartItems => _cartItems;
   
   //add
-  void addItemToCart(int index){    
-    _cartItems.add(_menuItems[index]);
+  void addItemToCart(Menu menu , int quantity){  
+    for(int i = 0 ; i < quantity ; i++) {
+       _cartItems.add(menu);
+    } 
     notifyListeners();  
   }
   
   //remove
-   void removeItemFromCart(int index){
-    _cartItems.remove(_menuItems[index]);
+   void removeItemFromCart(Menu menu){
+    _cartItems.remove(menu);
     notifyListeners();   
   }
 

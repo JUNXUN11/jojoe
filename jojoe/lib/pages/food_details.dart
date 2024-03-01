@@ -4,6 +4,7 @@ import 'package:jojoe/components/button.dart';
 import 'package:jojoe/model/menu.dart';
 import 'package:jojoe/model/menu_model.dart';
 import 'package:jojoe/theme/color.dart';
+import 'package:provider/provider.dart';
 
 class FoodDetails extends StatefulWidget {
   
@@ -17,6 +18,7 @@ class FoodDetails extends StatefulWidget {
 
 class _FoodDetailsState extends State<FoodDetails> {
 
+  
   int quantity = 0 ;
 
   void decrementValue(){
@@ -30,6 +32,50 @@ class _FoodDetailsState extends State<FoodDetails> {
       quantity ++;
     });
   }  
+
+  void addToCart(){
+    if(quantity > 0){
+      final choosemenu = context.read<MenuModel>();
+
+      choosemenu.addItemToCart(widget.menu,quantity);
+    
+      showDialog(
+        context: context, 
+        barrierDismissible: true,
+        builder: (context) => AlertDialog(
+          backgroundColor: Colors.black,
+          content: Text(
+            'Successfully added to cart',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.center,
+            ),
+          actions: [
+            Container(
+              decoration: ShapeDecoration(
+                shape: CircleBorder(),
+                color: Colors.white
+              ),
+              child: Center(
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.done_outline,color: Colors.black,),
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
+    
+
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +180,9 @@ class _FoodDetailsState extends State<FoodDetails> {
                           ),
                         ),
                         const SizedBox(width: 10,),
-                       AddtoCartButton(),
+                       GestureDetector(
+                        onTap: addToCart,
+                        child: AddtoCartButton()),
                       ],                                    
                       ),                    
                     ], 
