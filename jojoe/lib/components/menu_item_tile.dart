@@ -33,7 +33,7 @@ class _MenuItemTileState extends State<MenuItemTile> {
         onTap: widget.onPressed,
         child: Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 229, 179, 179),
+            color: Colors.white.withOpacity(0.9),
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
@@ -68,7 +68,7 @@ class _MenuItemTileState extends State<MenuItemTile> {
                 ),
               ),
               Text(
-                'RM ${widget.price}'+'0',
+                'RM ${widget.price.toStringAsFixed(2)}',
                 style: GoogleFonts.redRose(
                   fontSize: 15,
                   fontWeight: FontWeight.bold

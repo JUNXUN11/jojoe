@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jojoe/components/button.dart';
 import 'package:jojoe/components/menu_item_tile.dart';
@@ -7,6 +8,7 @@ import 'package:jojoe/model/menu_model.dart';
 import 'package:jojoe/pages/cart_page.dart';
 import 'package:jojoe/pages/menu_page.dart';
 import 'package:jojoe/theme/color.dart';
+import 'package:jojoe/utils/size_config.dart';
 import 'package:provider/provider.dart';
 
 
@@ -29,48 +31,32 @@ class _HomePageState extends State<HomePage> {
             style: GoogleFonts.oswald(
               fontWeight: FontWeight.bold
             ),
-          )             
+          ),             
         ),
         leading: GestureDetector(
             onTap: (){
               FirebaseAuth.instance.signOut();
             },
-          child: Padding(
-            padding: const EdgeInsets.only(right:8),
-            child: Icon(Icons.logout),
-          ),
+          child: Icon(Icons.logout),
         ),
         actions: [   
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             color: Colors.black, 
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-               builder: (context){
-               return CartPage();
-              },      
-            ));
+            context.push('/cart');
             }
           )
       ],    
-    ),
-    
-    //order button
-    floatingActionButton: FloatingActionButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(
-        builder: (context){
-          return MenuPage();
-        },      
-      )),
-      backgroundColor: Colors.black,
-      child: Icon(Icons.food_bank,color: Colors.white,)
-    ),
-      
-      body: Column(       
-        children: [
-          const SizedBox(height: 20,),
-          Wallet(),
-        ],
+    ),  
+      body: SingleChildScrollView(
+        child: Column(       
+          children: [
+            SizedBox(height: ScreenSize.vertical! * 4,),
+            Wallet(),
+           
+          ],
+        ),
       ),
     );
   }
@@ -109,7 +95,7 @@ class Wallet extends StatelessWidget {
                  fontWeight: FontWeight.bold
                ),              
             ),
-            const SizedBox(height: 20,),
+            SizedBox(height: ScreenSize.vertical! *2,),
               Text(
                'RM 0 ',
                style: GoogleFonts.aBeeZee(
@@ -119,7 +105,7 @@ class Wallet extends StatelessWidget {
             ),
             ],
           ),
-          const SizedBox(height: 20,),
+          SizedBox(height: ScreenSize.vertical! *2,),
                               
           GestureDetector(
            child: MyButton(

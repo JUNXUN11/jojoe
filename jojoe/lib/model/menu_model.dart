@@ -13,15 +13,22 @@ class MenuModel extends ChangeNotifier{
     Menu(cname: "白雞飯", name: "Hainan chicken rice", url: "lib/images/baijifan.png",price: 7,selected: false),
     Menu(cname: "叉燒飯", name: "Barbecue pork rice", url: "lib/images/chashaofan.png",price: 8,selected: false),
     Menu(cname: "燒肉飯", name: "Roast pork rice", url: "lib/images/shaoroufan.png",price: 8,selected: false),
-    Menu(name: "三拼飯", cname: "Threesome rice", url: "lib/images/sanping.png",price: 10,selected: false),
-    Menu(name: "炒飯", cname: "fried rice", url: "lib/images/chaofan.png",price: 7,selected: false),
-    Menu(name: "滷肉飯", cname: "Braised pork rice", url: "lib/images/luroufan.png",price: 9,selected: false),
+    Menu(cname: "三拼飯", name: "Threesome rice", url: "lib/images/sanping.png",price: 10,selected: false),
+    
+  ];
+
+  final List <Menu> _specialMenuItems = [
+    Menu(cname: "炒飯", name: "fried rice", url: "lib/images/chaofan.png",price: 7,selected: false),
+    Menu(cname: "滷肉飯", name: "Braised pork rice", url: "lib/images/luroufan.png",price: 9,selected: false),
   ];
 
   //cart list
-  final List <Menu> _cartItems = [];
+  final List <Menu> _cartItems = [
+    
+  ];
 
   get menuItems => _menuItems;
+  get specialMenuItems => _specialMenuItems;
   get cartItems => _cartItems;
   
   //add

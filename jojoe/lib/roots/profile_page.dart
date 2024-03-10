@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jojoe/profile/text_box.dart';
+import 'package:jojoe/utils/size_config.dart';
+import 'package:jojoe/utils/text_box.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -42,6 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize().init(context);
     return Scaffold(
       appBar: AppBar(
         title:Center(
@@ -62,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
           final userData = snapshot.data!.data() as Map <String,dynamic>;
           return ListView(
             children: [
-              const SizedBox(height: 50,),
+              SizedBox(height: ScreenSize.vertical! *3,),
           
               //profile picture
               const Icon(
@@ -70,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 size: 72,
               ),
           
-              const SizedBox(height: 10,),
+              SizedBox(height: ScreenSize.vertical! *2,),
           
               Text(
                 currentUser.email!,
@@ -78,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(color: Colors.grey),
               ),
           
-              const SizedBox(height: 50,),
+              SizedBox(height: ScreenSize.vertical! * 6,),
           
               Padding(
                 padding: const EdgeInsets.only(left: 25),
@@ -116,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () => editField('Location'),
               ),  
 
-            const SizedBox(height: 20,),
+            SizedBox(height: ScreenSize.vertical! *5,),
             ],
 
             

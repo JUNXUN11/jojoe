@@ -79,6 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(),
 
@@ -90,13 +91,13 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [          
                 //Welcome text
                 Text(
-                  'Welcome to Jojoe ',
+                  'Welcome to Jojoe Chicken Rice ',
                   style: GoogleFonts.oswald(
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: size.height * 0.02,),
                 Text(
                   'Please Register your Account ',
                   style: GoogleFonts.oswald(
@@ -104,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontWeight: FontWeight.bold
                   ),
                 ),
-                SizedBox(height:50.0),  
+                SizedBox(height: size.height * 0.05,),
 
                 //firstname
                 Padding(
@@ -128,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
+                SizedBox(height: size.height * 0.02,),
 
                 //lastname
                 Padding(
@@ -152,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
+               SizedBox(height: size.height * 0.02,),
 
                 //email
                 Padding(
@@ -176,7 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-              SizedBox(height: 15,),
+              SizedBox(height: size.height * 0.02,),
                 
               //PhoneNumber
                 Padding(
@@ -201,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
 
-                SizedBox(height: 15,),
+                SizedBox(height: size.height * 0.02,),
 
                 //location
                 Padding(
@@ -249,7 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
+               SizedBox(height: size.height * 0.02,),
 
                 //confirm password
                 Padding(
@@ -273,7 +274,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30,),
+               SizedBox(height: size.height * 0.04,),
 
                 GestureDetector(
                   onTap: signUp,
@@ -291,8 +292,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     )
                   ),
                 ),
-              SizedBox(height:10),
-
+             SizedBox(height: size.height * 0.02,),
+             
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -312,6 +313,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   )
               ]
               ),
+              SizedBox(height: size.height * 0.05,),
               ],),
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:jojoe/components/button.dart';
 import 'package:jojoe/model/menu.dart';
 import 'package:jojoe/model/menu_model.dart';
 import 'package:jojoe/theme/color.dart';
+import 'package:jojoe/utils/size_config.dart';
 import 'package:provider/provider.dart';
 
 class FoodDetails extends StatefulWidget {
@@ -41,7 +42,7 @@ class _FoodDetailsState extends State<FoodDetails> {
     
       showDialog(
         context: context, 
-        barrierDismissible: true,
+        barrierDismissible: false,
         builder: (context) => AlertDialog(
           backgroundColor: Colors.black,
           content: Text(
@@ -63,6 +64,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                 child: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   icon: Icon(Icons.done_outline,color: Colors.black,),
                 ),
@@ -79,6 +81,7 @@ class _FoodDetailsState extends State<FoodDetails> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize().init(context);
     return Scaffold(  
       appBar: AppBar(),    
       body: Column(
@@ -89,14 +92,14 @@ class _FoodDetailsState extends State<FoodDetails> {
               //image
               Image.asset(
                 widget.menu.url,
-                height: 250,
-                width: 250,
+                height: ScreenSize.vertical! * 35,
+                width: ScreenSize.horizontal! * 25,
               ),
 
-              const SizedBox(height: 25,),
+              SizedBox(height: ScreenSize.vertical! *4,),
 
               Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: EdgeInsets.only(left:ScreenSize.vertical! * 2),
                 child: Row(  
                   crossAxisAlignment: CrossAxisAlignment.start,          
                   children: [
@@ -107,7 +110,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                         fontWeight: FontWeight.bold
                       ),                  
                     ),
-                    const SizedBox(width: 10,),
+                    SizedBox(width: ScreenSize.horizontal! *3,),
                     Text(
                       widget.menu.name,
                       style: GoogleFonts.dmSerifDisplay(
@@ -120,7 +123,7 @@ class _FoodDetailsState extends State<FoodDetails> {
               ),
               
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding:EdgeInsets.all(ScreenSize.horizontal! * 4),
                 child: Text(
                       'RM ${widget.menu.price}'+'0',
                       style: GoogleFonts.dmSerifDisplay(
@@ -136,16 +139,16 @@ class _FoodDetailsState extends State<FoodDetails> {
               
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:EdgeInsets.all(ScreenSize.horizontal! * 4),
                   child: Column(
                     children: [
                       Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const SizedBox(width: 50,),
+                        SizedBox(width: ScreenSize.horizontal! * 8,),
                         Container(                   
-                          width: 38,
-                          height: 38,
+                          width:  ScreenSize.horizontal! * 10,
+                          height:  ScreenSize.horizontal! * 10,
                           decoration: BoxDecoration(
                             color: Colors.black,
                             shape: BoxShape.circle,
@@ -156,7 +159,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                             icon: Icon(Icons.remove,color: Colors.white,)
                           ),
                         ),
-                        SizedBox(width: 5,),
+                        SizedBox(width: ScreenSize.horizontal! * 1,),
                         //quantity
                         Text(
                           quantity.toString(),
@@ -166,10 +169,10 @@ class _FoodDetailsState extends State<FoodDetails> {
                             fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(width: 5,),
+                         SizedBox(width: ScreenSize.horizontal! * 2,),
                         Container(
-                          width: 38,
-                          height: 38,
+                          width:  ScreenSize.horizontal! * 10,
+                          height:  ScreenSize.horizontal! * 10,
                           decoration: BoxDecoration(
                             color: Colors.black,
                             shape: BoxShape.circle
@@ -179,7 +182,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                             icon: Icon(Icons.add,color: Colors.white,)
                           ),
                         ),
-                        const SizedBox(width: 10,),
+                         SizedBox(width: ScreenSize.horizontal! *3,),
                        GestureDetector(
                         onTap: addToCart,
                         child: AddtoCartButton()),
@@ -206,7 +209,7 @@ class AddtoCartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
+      width:  ScreenSize.horizontal! *38,
       decoration: BoxDecoration(
       color: Colors.black,
       borderRadius: BorderRadius.circular(20),
@@ -220,7 +223,7 @@ class AddtoCartButton extends StatelessWidget {
           style: TextStyle(color: Colors.white),),
         ),
        
-        const SizedBox(width: 10,),
+         SizedBox(width: ScreenSize.horizontal! *3,),
     
         Icon(
         Icons.arrow_forward,

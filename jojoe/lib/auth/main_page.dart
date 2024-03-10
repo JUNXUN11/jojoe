@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jojoe/auth/auth_page.dart';
-import 'package:jojoe/pages/home.dart';
+import 'package:jojoe/roots/home_page.dart';
+import 'package:jojoe/route/home.dart';
 
 class Mainpage extends StatelessWidget {
   const Mainpage({super.key});

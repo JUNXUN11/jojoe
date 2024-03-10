@@ -10,7 +10,7 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: primaryColor,
+        color: Colors.black,
         borderRadius: BorderRadius.circular(20),
       ),
     padding: EdgeInsets.all(20),

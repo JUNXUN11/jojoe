@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jojoe/pages/forget_pw_page.dart';
+import 'package:jojoe/utils/size_config.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -28,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
       password: _passwordController.text.trim(),
     );
 
-    Navigator.of(context).pop();
 }
 
   void dispose(){
@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize().init(context);
     return Scaffold(
       appBar:AppBar(),
 
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 48,                
                 ),              
               ),
-              SizedBox(height: 60,),
+              SizedBox(height: ScreenSize.vertical! *13),
          
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35),
@@ -81,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: ScreenSize.vertical! *3),
                Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35),
                 child: Container(
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),                  
                 ),
               ),
-              SizedBox(height: 40,),
+              SizedBox(height: ScreenSize.vertical! *7),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35,),
                 child: Row(
@@ -127,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              SizedBox(height:15),
+              SizedBox(height: ScreenSize.vertical! *3),
 
               //sign in button
               Padding(
@@ -152,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 25,),
+             SizedBox(height: ScreenSize.vertical! *3),
                           
               //register now
               Row(

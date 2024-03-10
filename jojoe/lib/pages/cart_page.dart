@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jojoe/components/button.dart';
 import 'package:jojoe/model/menu.dart';
 import 'package:jojoe/model/menu_model.dart';
 import 'package:jojoe/pages/pay_page.dart';
+import 'package:jojoe/utils/size_config.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
@@ -23,14 +25,32 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size; 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cart'),
+      appBar: AppBar(     
       ),
       body: Consumer<MenuModel>(
         builder: (context, value, child) {
-          return Column(
+          return Column(           
             children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: ScreenSize.horizontal! * 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'CART',
+                      style: GoogleFonts.oswald(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 50
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: ScreenSize.vertical! * 4), 
+
               Expanded(
                 child: ListView.builder(
                   itemCount: value.cartItems.length,
@@ -41,27 +61,29 @@ class _CartPageState extends State<CartPage> {
                     final double price = value.cartItems[index].price;
                     return Container(
                       decoration: BoxDecoration(
+                        color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withOpacity(0.8),
                             blurRadius:5,
                             spreadRadius: 0.00,
                           )],
                         ),
-                      margin: const EdgeInsets.only(left: 20 , top: 20, right: 20),
+                      margin: EdgeInsets.all(size.width * 0.04),
                       child: ListTile(
                         title: Text(
                           name + '   ' + cname,
-                          style: GoogleFonts.courgette(
+                          style: GoogleFonts.openSans(
                           fontWeight: FontWeight.bold,
-                          fontSize: 17
+                          fontSize: 20
                           ),
                         ),                                                                                                                                             
-                        subtitle: Text('RM ${price}'+'0',
-                            style: GoogleFonts.courgette(
+                        subtitle: Text(
+                          'RM ${price.toStringAsFixed(2)}',
+                            style: GoogleFonts.openSans(
                             fontWeight: FontWeight.bold,
-                            fontSize: 14
+                            fontSize: 20
                           ),),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
@@ -71,10 +93,11 @@ class _CartPageState extends State<CartPage> {
                           }
                         ),
                       ),
+                      
                     );
                   }
                 ),
-              
+               
               ),
               Padding(
                 padding: const EdgeInsets.all(36.0),
@@ -92,16 +115,17 @@ class _CartPageState extends State<CartPage> {
                         children: [
                           Text(
                             'Total Price',
-                            style: TextStyle(
+                            style: GoogleFonts.nunito(
                               color: Colors.white, 
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20
                             )
                           ),
                           const SizedBox(height: 5,),
                           Text('RM '+calculatePrice(),
-                          style: TextStyle(
+                          style: GoogleFonts.nunito(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold
                           ),                          
                           ),
@@ -126,13 +150,11 @@ class _CartPageState extends State<CartPage> {
                             child: IconButton(
                               icon: Icon(
                                 Icons.arrow_forward,
-                                size: 20,
+                                size: 23,
                                 color: Colors.black,
                               ),                             
                               onPressed: () { 
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return PayPage();
-                                }));
+                                context.push('/pay');
                                },
                             ),
                           )
