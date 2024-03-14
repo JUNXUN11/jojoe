@@ -42,6 +42,7 @@ dependencies:
   firebase_messaging: ^14.7.9
   provider:
   go_router: ^13.2.0
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:

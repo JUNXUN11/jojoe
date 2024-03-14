@@ -23,6 +23,8 @@ class _CartPageState extends State<CartPage> {
           .calculatePrice();
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size; 
@@ -72,18 +74,33 @@ class _CartPageState extends State<CartPage> {
                         ),
                       margin: EdgeInsets.all(size.width * 0.04),
                       child: ListTile(
-                        title: Text(
-                          name + '   ' + cname,
-                          style: GoogleFonts.openSans(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20
-                          ),
-                        ),                                                                                                                                             
-                        subtitle: Text(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name ,
+                              style: GoogleFonts.openSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18
+                              ),
+                            ),
+                            Text(
+                              cname,
+                              style: GoogleFonts.openSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18
+                              ),
+                            ),
+                            SizedBox(height: 8,)
+                          ],
+                        ),
+                                                                                                                                                         
+                        subtitle:                     
+                        Text(
                           'RM ${price.toStringAsFixed(2)}',
                             style: GoogleFonts.openSans(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20
+                            fontSize: 15
                           ),),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
@@ -153,9 +170,44 @@ class _CartPageState extends State<CartPage> {
                                 size: 23,
                                 color: Colors.black,
                               ),                             
-                              onPressed: () { 
-                                context.push('/pay');
-                               },
+                              onPressed: () {
+                              Provider.of<MenuModel>
+                                (context,listen: false).isCartEmpty()
+                                ? showDialog(
+                                context: context, 
+                                barrierDismissible: false,
+                                builder: (context) => AlertDialog(
+                                  backgroundColor: Colors.black,
+                                  content: Text(
+                                    'Your Cart is empty',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    ),
+                                  actions: [
+                                    Container(
+                                      decoration: ShapeDecoration(
+                                        shape: CircleBorder(),
+                                        color: Colors.white
+                                      ),
+                                      child: Center(
+                                        child: IconButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          },
+                                          icon: Icon(Icons.mood_bad_sharp,color: Colors.black,),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                              : context.push('/pay');                                                                                                                                 
+                            },
                             ),
                           )
                         ],
@@ -164,8 +216,7 @@ class _CartPageState extends State<CartPage> {
                   ),
                 ),
               )
-            ],
-            
+            ],            
           );
         },
       )

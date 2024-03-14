@@ -1,7 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jojoe/model/menu.dart';
 
 
+final currentUser = FirebaseAuth.instance.currentUser!;
+
+ 
+
+void getUserData() async{
+  QuerySnapshot querySnapshot = 
+    await FirebaseFirestore.instance
+    .collection('users')
+    .get();
+
+}
 
 
 class MenuModel extends ChangeNotifier{
@@ -22,14 +35,27 @@ class MenuModel extends ChangeNotifier{
     Menu(cname: "滷肉飯", name: "Braised pork rice", url: "lib/images/luroufan.png",price: 9,selected: false),
   ];
 
-  //cart list
-  final List <Menu> _cartItems = [
-    
+  final List <Menu> _sideMenuItems =[
+    Menu(cname: "叉燒包", name: "Char Siew Pau", url: "lib/images/charsiubao.png",price: 5,selected: false),
   ];
 
+  final List <Menu> _drinksMenuItems=[
+    Menu(cname: "咖啡", name: "Kopi Ais", url: "lib/images/kopi.png",price: 4,selected: false),
+    Menu(cname: "奶茶", name: "Teh Ais", url: "lib/images/teh.png",price: 4,selected: false),
+    Menu(cname: "美露", name: "Milo Ais", url: "lib/images/milo.png",price: 4,selected: false),
+  ];
+
+  //cart list
+  final List <Menu> _cartItems = [];
+    
+  
   get menuItems => _menuItems;
   get specialMenuItems => _specialMenuItems;
+  get sideMenuItems => _sideMenuItems;
+  get drinksMenuItems => _drinksMenuItems;
   get cartItems => _cartItems;
+  
+  
   
   //add
   void addItemToCart(Menu menu , int quantity){  
@@ -40,10 +66,21 @@ class MenuModel extends ChangeNotifier{
   }
   
   //remove
-   void removeItemFromCart(Menu menu){
+  void removeItemFromCart(Menu menu){
     _cartItems.remove(menu);
     notifyListeners();   
   }
+
+  //remove all after successfully paid
+  void removeAllFromCart(){
+   for(int i = 0 ; i < _cartItems.length ; i++) {
+       _cartItems.remove(_cartItems[i]);
+    } 
+    notifyListeners();  
+  }
+
+
+
 
   //calculate
   String calculatePrice(){
@@ -53,4 +90,29 @@ class MenuModel extends ChangeNotifier{
     }
     return totalPrice.toStringAsFixed(2);
   }
+
+  //check cart empty
+  bool isCartEmpty(){
+    if(_cartItems.isEmpty){
+      return true;
+    }
+    else{
+      return false;
+    }   
+  }
+
+
+  Future <void> addToFirebase(String _name, String _location, double _phoneNumber ,String _paymethod ) async{
+  for(int i = 0 ; i < _cartItems.length ; i++){
+    FirebaseFirestore.instance.collection('orders')
+  .add({
+    'name' : _name,
+    'order name' : _cartItems[i].name,
+    'location' : _location,
+    'Phone Number' : '0' +_phoneNumber.toStringAsFixed(0),
+    'Pay Method' : _paymethod
+  });
+  }
 }
+}
+

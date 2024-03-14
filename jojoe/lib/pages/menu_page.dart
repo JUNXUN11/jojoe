@@ -74,7 +74,9 @@ class _MenuPageState extends State<MenuPage> {
               Menu()
             : (num == 1)
               ? SpecialMenu()
-              : Menu(),
+                : (num == 2 )
+                  ? SideMenu()
+            : DrinksMenu(),
           ),                                                                          
             
           SizedBox(height: ScreenSize.vertical! *3,),
@@ -152,6 +154,88 @@ class Menu extends StatelessWidget {
                 onPressed: (){ 
                   final menumodel = context.read<MenuModel>();
                   final choosemenu = menumodel.menuItems;
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) =>
+                    FoodDetails(menu: choosemenu[index]),
+                    )
+                  );
+    
+                },        
+            );
+          }              
+          );
+        },
+      ),           
+    );
+  }
+}
+
+class SideMenu extends StatelessWidget {
+  const SideMenu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Consumer<MenuModel>(
+        builder: (context, value, child) {
+          return GridView.builder(
+            itemCount: value.sideMenuItems.length,
+        padding: EdgeInsets.all(ScreenSize.vertical! * 2),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemBuilder: (context,index){
+          return MenuItemTile(
+                itemName: value.sideMenuItems[index].name, 
+                itemCName: value.sideMenuItems[index].cname,
+                imagePath: value.sideMenuItems[index].url,
+                price : value.sideMenuItems[index].price, 
+                onPressed: (){ 
+                  final menumodel = context.read<MenuModel>();
+                  final choosemenu = menumodel.sideMenuItems;
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) =>
+                    FoodDetails(menu: choosemenu[index]),
+                    )
+                  );
+    
+                },        
+            );
+          }              
+          );
+        },
+      ),           
+    );
+  }
+}
+
+class DrinksMenu extends StatelessWidget {
+  const DrinksMenu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Consumer<MenuModel>(
+        builder: (context, value, child) {
+          return GridView.builder(
+            itemCount: value.drinksMenuItems.length,
+        padding: EdgeInsets.all(ScreenSize.vertical! * 2),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemBuilder: (context,index){
+          return MenuItemTile(
+                itemName: value.drinksMenuItems[index].name, 
+                itemCName: value.drinksMenuItems[index].cname,
+                imagePath: value.drinksMenuItems[index].url,
+                price : value.drinksMenuItems[index].price, 
+                onPressed: (){ 
+                  final menumodel = context.read<MenuModel>();
+                  final choosemenu = menumodel.drinksMenuItems;
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) =>
                     FoodDetails(menu: choosemenu[index]),
