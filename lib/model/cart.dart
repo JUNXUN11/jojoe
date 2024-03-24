@@ -1,22 +1,18 @@
-
-class Menu {
+class Cart {
   final String cname ;
   final String name;
   final String url;
-  final double price;
-  final bool selected;
+  double price;
+  String note;
+  
 
-  Menu( {
+  Cart( {
     required this.cname , 
     required this.name , 
     required this.url,
-    required this.selected,
-    required this.price
+    required this.note,
+    required this.price,
+    
   });
-  
-}
 
-    
-   
-  
-    
+}

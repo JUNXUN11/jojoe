@@ -10,9 +10,22 @@ import 'package:provider/provider.dart';
 class FoodDetails extends StatefulWidget {
   
   final Menu menu;
+  final Map<Addon, bool> selectedAddons = {};
   
-  FoodDetails({super.key, required this.menu, });
 
+  FoodDetails({
+    super.key, 
+    required this.menu, 
+   })
+    
+    {
+    for( Addon addon in menu.availableaddOn){
+      selectedAddons[addon] = false ;
+  }
+
+  }
+
+  
   @override
   State<FoodDetails> createState() => _FoodDetailsState();
 }
@@ -21,6 +34,7 @@ class _FoodDetailsState extends State<FoodDetails> {
 
   
   int quantity = 0 ;
+  bool addRice = false;
 
   void decrementValue(){
     setState(() {
@@ -34,11 +48,25 @@ class _FoodDetailsState extends State<FoodDetails> {
     });
   }  
 
+   String addonNote(){ 
+    String note = '';
+    for(int i = 0 ; i < widget.menu.availableaddOn.length ; i++){
+      Addon addon = widget.menu.availableaddOn[i];
+      if(widget.selectedAddons[addon] == true){
+        note += addon.name + ' ';
+        if(addon.name == 'add rice'){
+          addRice = true;
+        }
+      }   
+    }
+     return note;
+  }
+
   void addToCart(){
     if(quantity > 0){
       final choosemenu = context.read<MenuModel>();
 
-      choosemenu.addItemToCart(widget.menu,quantity);
+      choosemenu.addItemToCart(widget.menu,quantity,addonNote(),addRice);
     
       showDialog(
         context: context, 
@@ -73,15 +101,16 @@ class _FoodDetailsState extends State<FoodDetails> {
           ],
         ),
       );
-    }
-    
-
-    
+    } 
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     ScreenSize().init(context);
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(  
       appBar: AppBar(),    
       body: Column(
@@ -132,11 +161,56 @@ class _FoodDetailsState extends State<FoodDetails> {
                       ),
                     ),
               ),
+
+              SizedBox(height: size.height * 0.03,),
+
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemCount: widget.menu.availableaddOn.length,
+                itemBuilder: ((context, index) {
+                  Addon addon = widget.menu.availableaddOn[index];
+
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CheckboxListTile(                   
+                      title: Row(                     
+                        children: [
+                          Text(
+                          addon.cname,
+                          style: GoogleFonts.openSans(                      
+                          fontSize: 17
+                          ),
+                        ),
+                        SizedBox(width: 10,),
+                         Text(
+                          addon.name,
+                          style: GoogleFonts.openSans(                      
+                          fontSize: 17
+                          ),
+                        ),
+                        SizedBox(height: 20,)
+                        ],
+                      ),
+                      subtitle: Text(
+                        '+ RM'+addon.price.toStringAsFixed(2),
+                        style: TextStyle(color: Colors.black.withOpacity(0.4)),
+                      ),
+                      value: widget.selectedAddons[addon],
+                      onChanged:(bool? value){
+                        setState(() {
+                          widget.selectedAddons[addon] = value!;                 
+                        });
+                      }
+                    ),
+                  );
+                })
+              )
             ],
           )),
           Container(
-            child: Column(
-              
+            child: Column(              
               children: [
                 Padding(
                   padding:EdgeInsets.all(ScreenSize.horizontal! * 4),

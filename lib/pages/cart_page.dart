@@ -57,10 +57,10 @@ class _CartPageState extends State<CartPage> {
                 child: ListView.builder(
                   itemCount: value.cartItems.length,
                   itemBuilder: (context,index){
-                    final Menu menu = value.cartItems[index];
                     final String cname = value.cartItems[index].cname;
                     final String name = value.cartItems[index].name;
                     final double price = value.cartItems[index].price;
+                    final String note = value.cartItems[index].note;
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -96,17 +96,23 @@ class _CartPageState extends State<CartPage> {
                         ),
                                                                                                                                                          
                         subtitle:                     
-                        Text(
-                          'RM ${price.toStringAsFixed(2)}',
-                            style: GoogleFonts.openSans(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15
-                          ),),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'RM ${price.toStringAsFixed(2)}',
+                                style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                              ),),
+                            Text(note),
+                          ],
+                        ),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
                           onPressed:(){
                             Provider.of<MenuModel>(context,listen: false)
-                            .removeItemFromCart(menu);
+                            .removeItemFromCart(index);
                           }
                         ),
                       ),
